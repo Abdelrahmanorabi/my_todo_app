@@ -10,9 +10,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'ToDo App',
-      initialRoute: HomePage.rounteName,
-      routes: {HomePage.rounteName: (_) => HomePage()},
+      initialRoute: HomePage.routeName,
+      routes: {HomePage.routeName: (_) => HomePage()},
     );
   }
 }
