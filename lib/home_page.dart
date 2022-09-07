@@ -11,11 +11,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  /*==================[Variables]===================*/
-
-  /*================================================*/
   /*==================[Methods]=====================*/
 
+  // To show bottomSheet Screen
   void showBottomSheetDetails() {
     showModalBottomSheet(
         isScrollControlled: true,
@@ -25,7 +23,7 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
-  // method to refresh page details by pulling down
+  //To refresh page details by pulling down
   Future<void> refreshPage() async {
     setState(() {
       TaskWidgetAdd.allTasks;
@@ -73,24 +71,43 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               TaskWidgetAdd.deleteAllTasks();
             },
-            tooltip:'delete @ll',
+            tooltip: 'delete @ll',
             iconSize: 27,
             icon: const Icon(
-                Icons.delete_forever,
-                color: Color.fromARGB(255, 142, 31, 54),),
+              Icons.delete_forever,
+              color: Color.fromARGB(255, 142, 31, 54),
+            ),
           )
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showBottomSheetDetails();
-          // showDialogDetails();
-        },
-        backgroundColor: Colors.redAccent,
-        child: const Icon(
-          Icons.add,
-          size: 30,
-        ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              refreshPage();
+            },
+            backgroundColor: Colors.green,
+            child:const Icon(
+              Icons.refresh,
+              size: 20,
+            ),
+          ),
+          SizedBox(width: MediaQuery.of(context).size.width*.05,),
+          FloatingActionButton(
+            onPressed: () {
+              showBottomSheetDetails();
+              // showDialogDetails(); you can use this method to use Dialog instead of Bottom sheet
+            },
+            backgroundColor: Colors.redAccent,
+            child: Icon(
+              Icons.add,
+              size: 20,
+            ),
+          ),
+
+
+        ],
       ),
       body: SizedBox(
         width: double.infinity,
@@ -110,9 +127,10 @@ class _HomePageState extends State<HomePage> {
                       isDone: TaskWidgetAdd.allTasks[index].status,
                       changeStatus: () {
                         TaskWidgetAdd.changeStatus(index);
-                      }, deleteTask: (){
-                      TaskWidgetAdd.deleteTask(index);
-                    },
+                      },
+                      deleteTask: () {
+                        TaskWidgetAdd.deleteTask(index);
+                      },
                     );
                   }),
             ))
