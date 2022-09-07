@@ -7,9 +7,22 @@ class TaskWidgetAdd extends StatefulWidget {
 
   /*==================[Variables]===================*/
   static List<Task> allTasks = [
-    Task(title: 'feed11', status: false),
-    Task(title: 'feed12', status: true),
-  ];  /*================================================*/
+    // Task(title: 'feed11',description: 'www', status: true),
+    // Task(title: 'feed12',description: 'eeee', status: true),
+  ];
+
+    static void changeStatus(int taskIndex){
+      allTasks[taskIndex].status = !allTasks[taskIndex].status;
+    }
+
+  static void deleteTask(int taskIndex){
+    allTasks.removeAt(taskIndex);
+  }
+
+  static void deleteAllTasks(){
+      allTasks.clear();
+  }
+  /*================================================*/
 
   @override
   State<TaskWidgetAdd> createState() => _TaskWidgetAddState();
@@ -18,13 +31,14 @@ class TaskWidgetAdd extends StatefulWidget {
 class _TaskWidgetAddState extends State<TaskWidgetAdd> {
   /*==================[Variables]===================*/
   TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   final  formKey = GlobalKey<FormState>();
   /*================================================*/
 
   /*==================[Methods]===================*/
 
   void addNewTask() {
-    TaskWidgetAdd.allTasks.add(Task(title: titleController.text));
+    TaskWidgetAdd.allTasks.add(Task(title: titleController.text,description: descriptionController.text));
     Navigator.pop(context);
     print( TaskWidgetAdd.allTasks);
   }
@@ -52,6 +66,18 @@ class _TaskWidgetAddState extends State<TaskWidgetAdd> {
               decoration: const InputDecoration(labelText: 'Add New Task'),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            TextFormField(
+              validator: (value){
+                if(value==null|| value.trim().isEmpty){
+                  return'You must enter task description';
+                }
+                return null;
+              },
+              controller: descriptionController,
+              maxLength: 60,
+              maxLines: 2,
+              decoration: const InputDecoration(labelText: 'Add description'),
+            ),
             TextButton(
                 onPressed: () {
                   if(formKey.currentState!.validate() == true){
