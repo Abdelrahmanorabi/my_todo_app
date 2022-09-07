@@ -64,6 +64,7 @@ class TodoCard extends StatelessWidget {
                 onPressed: () {
                   changeStatus();
                 },
+                splashColor:Colors.yellow,
                 tooltip:'undone',
                 iconSize: 22,
                 icon: const Icon(
@@ -76,6 +77,7 @@ class TodoCard extends StatelessWidget {
                 onPressed: () {
                   changeStatus();
                 },
+                splashColor:Colors.yellow,
                 iconSize: 22,
                 tooltip:'done',
                 icon: const Icon(
@@ -90,6 +92,7 @@ class TodoCard extends StatelessWidget {
                 onPressed: () {
                   deleteTask();
                 },
+                splashColor:Colors.yellow,
                 tooltip:'delete',
                 iconSize: 22,
                 icon: const Icon(
