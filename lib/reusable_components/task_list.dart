@@ -70,6 +70,7 @@ class _TaskListState extends State<TaskList> {
             onPressed: () {
               TaskWidgetAdd.deleteAllTasks();
             },
+            splashColor:Colors.yellow,
             tooltip: 'delete @ll',
             iconSize: 27,
             icon: const Icon(
