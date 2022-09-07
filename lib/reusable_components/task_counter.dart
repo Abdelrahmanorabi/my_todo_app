@@ -17,11 +17,11 @@ class TaskCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 10),
       child: Text(
         '${calculateCompletedTask()}/${TaskWidgetAdd.allTasks.length}',
         style: TextStyle(
-            fontSize: 44,
+            fontSize: 40,
             color: (calculateCompletedTask() == TaskWidgetAdd.allTasks.length &&
                     calculateCompletedTask() != 0)
                 ? Colors.greenAccent
