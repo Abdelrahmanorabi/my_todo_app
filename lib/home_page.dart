@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_todo_app/reusable_components/task_widget_add_page.dart';
 import 'package:my_todo_app/reusable_components/todo_card.dart';
 import 'package:my_todo_app/task.dart';
 
@@ -11,16 +12,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   /*==================[Variables]===================*/
-  List<Task> allTasks = [
-    Task(title: 'title1', status: false),
-    Task(title: 'title2', status: false),
-    Task(title: 'title3', status: true),
-    Task(title: 'title4', status: false),
-  ];
-
   /*================================================*/
-
   /*==================[Methods]=====================*/
+
+  void showBottomSheetDetails() {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (buildContext) {
+          return TaskWidgetAdd();
+        });
+  }
+  // method to refresh page details by pulling down
+  Future<void> refreshPage()async{
+    setState(() {
+      TaskWidgetAdd.allTasks;
+    });
+  }
   /*================================================*/
 
   @override
@@ -40,20 +48,33 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showBottomSheetDetails();
+        },
+        backgroundColor: Colors.redAccent,
+        child: const Icon(
+          Icons.add,
+          size: 30,
+        ),
+      ),
       body: SizedBox(
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-                child: ListView.builder(
-                    itemCount: allTasks.length,
-                    itemBuilder: (buildContext, index) {
-                      return TodoCard(
-                        title: allTasks[index].title,
-                        isDone: allTasks[index].status,
-                      );
-                    }))
+                child: RefreshIndicator(
+                  onRefresh: refreshPage,
+                  child: ListView.builder(
+                      itemCount: TaskWidgetAdd.allTasks.length,
+                      itemBuilder: (buildContext, index) {
+                        return TodoCard(
+                          title: TaskWidgetAdd.allTasks[index].title,
+                          isDone: TaskWidgetAdd.allTasks[index].status,
+                        );
+                      }),
+                ))
           ],
         ),
       ),
