@@ -73,7 +73,7 @@ class _SettingPageState extends State<SettingPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Engish',style: TextStyle(color: Colors.white,fontSize: 18),),
+                    const Text('English',style: TextStyle(color: Colors.white,fontSize: 18),),
                     IconButton(
                       onPressed: () {
                         showLanguageBottomSheet();
@@ -98,7 +98,7 @@ class _SettingPageState extends State<SettingPage> {
                 height: 20,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
                 width: MediaQuery.of(context).size.width * .9,
                 decoration: BoxDecoration(
                     border: Border.all(width: .7, color: Colors.black),
