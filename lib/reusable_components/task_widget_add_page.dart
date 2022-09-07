@@ -54,51 +54,55 @@ class _TaskWidgetAddState extends State<TaskWidgetAdd> {
       padding: const EdgeInsets.all(22),
       child: Form(
         key: widget.formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextFormField(
-              validator: (value){
-                if(value==null|| value.trim().isEmpty){
-                  return'You must enter task title';
-                }
-                return null;
-              },
-              controller: widget.titleController,
-              maxLength: 20,
-              decoration: const InputDecoration(labelText: 'Add New Task'),
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            TextFormField(
-              validator: (value){
-                if(value==null|| value.trim().isEmpty){
-                  return'You must enter task description';
-                }
-                return null;
-              },
-              controller: widget.descriptionController,
-              maxLength: 60,
-              maxLines: 2,
-              decoration: const InputDecoration(labelText: 'Add description'),
-            ),
-            TextButton(
-                onPressed: () {
-                  if(widget.formKey.currentState!.validate() == true){
-                    widget.addNewTask(context);
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                keyboardType: TextInputType.text,
+                validator: (value){
+                  if(value==null|| value.trim().isEmpty){
+                    return'You must enter task title';
                   }
-
+                  return null;
                 },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.redAccent),
-                ),
-                child: const Text(
-                  'ADD',
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ))
-          ],
+                controller: widget.titleController,
+                maxLength: 20,
+                decoration: const InputDecoration(labelText: 'Add New Task'),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+              TextFormField(
+                keyboardType: TextInputType.text,
+                validator: (value){
+                  if(value==null|| value.trim().isEmpty){
+                    return'You must enter task description';
+                  }
+                  return null;
+                },
+                controller: widget.descriptionController,
+                maxLength: 60,
+                maxLines: 2,
+                decoration: const InputDecoration(labelText: 'Add description'),
+              ),
+              TextButton(
+                  onPressed: () {
+                    if(widget.formKey.currentState!.validate() == true){
+                      widget.addNewTask(context);
+                    }
+
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.redAccent),
+                  ),
+                  child: const Text(
+                    'ADD',
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ))
+            ],
+          ),
         ),
       ),
     );
